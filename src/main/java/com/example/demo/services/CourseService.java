@@ -45,6 +45,12 @@ public class CourseService {
 
         Question question = mapper.map(questionRequest, Question.class);
         question.setCourse(course);
+//        for(int i = 0; i < question.getAlternatives().size(); i++) {
+//            question.getAlternatives().get(i).setId(String.valueOf(i));
+//        }
+        // manda a req ai
+        //bl
+        //foi blz, peri
         Question createdQuestion = questionService.createQuestion(question);
         return mapper.map(createdQuestion, QuestionResponse.class);
     }

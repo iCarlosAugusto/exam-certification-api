@@ -7,6 +7,7 @@ import com.example.demo.controllers.response.QuestionResponse;
 import com.example.demo.entities.Course;
 import com.example.demo.entities.Question;
 import com.example.demo.services.CourseService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
@@ -36,7 +37,7 @@ public class CoursesController {
     @PostMapping("/{courseId}/questions")
     QuestionResponse createQuestion(
             @PathVariable UUID courseId,
-            @RequestBody QuestionRequest question
+            @RequestBody @Valid QuestionRequest question
     ) throws Exception {
         return courseService.createQuestion(courseId, question);
     }
