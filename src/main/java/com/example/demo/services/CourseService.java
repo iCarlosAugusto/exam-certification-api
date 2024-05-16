@@ -9,6 +9,8 @@ import com.example.demo.entities.Question;
 import com.example.demo.repositories.CoursesRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +45,10 @@ public class CourseService {
     public QuestionResponse createQuestion(UUID courseId, QuestionRequest questionRequest) throws Exception {
         Course course = this.findCourseById(courseId).orElseThrow(() -> new Exception("Id do curso não existe"));
         Question question = mapper.map(questionRequest, Question.class);
+        boolean isValidQuestion = questionService.validateQuestionIsValid(question);
+        if(!isValidQuestion) {
+            throw new Exception("Questão inválida");
+        }
         question.setCourse(course);
         Question createdQuestion = questionService.createQuestion(question);
         return mapper.map(createdQuestion, QuestionResponse.class);
