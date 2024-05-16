@@ -6,6 +6,7 @@ CREATE TABLE tb_courses (
 
 CREATE TABLE tb_questions (
     id UUID PRIMARY KEY,
+    question_type TEXT,
     text TEXT NOT NULL,
     course_id UUID,
     FOREIGN KEY (course_id) REFERENCES tb_courses(id)
