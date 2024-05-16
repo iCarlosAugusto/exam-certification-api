@@ -15,5 +15,4 @@ public class CourseResponse {
     private UUID id;
     private String name;
     private String description;
-    private List<Question> questions;
 }

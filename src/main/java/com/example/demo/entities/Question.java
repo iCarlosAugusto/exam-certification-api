@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.UUID;
 
-@Table(name="tb_questions")
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name="tb_questions")
+@Entity
 public class Question {
 
     @Id

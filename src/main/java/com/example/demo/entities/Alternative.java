@@ -11,9 +11,16 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Embeddable
 public class Alternative {
+
+    @Column(name = "alternative_id")
+    private String id;
+
     private String textAlternative;
     private Boolean isCorrect;
+
+    public Alternative() {
+        this.id = UUID.randomUUID().toString();
+    }
 }
