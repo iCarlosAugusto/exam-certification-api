@@ -4,13 +4,16 @@ import com.example.demo.controllers.request.CourseRequest;
 import com.example.demo.controllers.request.QuestionRequest;
 import com.example.demo.controllers.response.CourseResponse;
 import com.example.demo.controllers.response.QuestionResponse;
-import com.example.demo.entities.Course;
-import com.example.demo.entities.Question;
+
+import com.example.demo.repositories.QuestionRepository;
+import com.example.demo.repositories.RepliedUserQuestionRepository;
+import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.CourseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
