@@ -14,7 +14,7 @@ CREATE TABLE tb_questions (
 
 CREATE TABLE tb_questions_alternatives (
     question_id UUID,
-    alternative_id TEXT,
+    alternative_id UUID,
     text_alternative TEXT,
     is_correct BOOLEAN,
     PRIMARY KEY (question_id, text_alternative),

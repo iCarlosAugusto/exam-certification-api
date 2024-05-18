@@ -15,12 +15,12 @@ import java.util.UUID;
 public class Alternative {
 
     @Column(name = "alternative_id")
-    private String id;
+    private UUID id;
 
     private String textAlternative;
     private Boolean isCorrect;
 
     public Alternative() {
-        this.id = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID();
     }
 }
