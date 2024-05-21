@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,7 +48,10 @@ public class CoursesController {
     }
 
     @GetMapping("/{courseId}/questions")
-    List<QuestionResponse> getQuestions(@PathVariable UUID courseId) throws Exception {
-        return courseService.getQuestions(courseId);
+    public ResponseEntity<Page<QuestionResponse>> getQuestions(
+            @PathVariable UUID courseId,
+            @RequestParam(value = "page", required = false, defaultValue = "0") int page
+    ) throws Exception {
+        return ResponseEntity.ok(courseService.getQuestions(courseId, page));
     }
 }

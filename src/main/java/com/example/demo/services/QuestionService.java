@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.controllers.request.ReplyQuestionRequest;
+import com.example.demo.controllers.response.QuestionResponse;
 import com.example.demo.entities.Alternative;
 import com.example.demo.entities.Question;
 import com.example.demo.entities.RepliedUserQuestion;
@@ -10,8 +11,10 @@ import com.example.demo.repositories.QuestionRepository;
 import com.example.demo.repositories.RepliedUserQuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -41,8 +44,8 @@ public class QuestionService {
         return false;
     }
 
-    public List<Question> getQuestions(UUID courseId) {
-        return questionRepository.findQuestionByCourseId(courseId);
+    public Page<Question> getQuestions(UUID courseId, Pageable page) {
+        return questionRepository.findQuestionByCourseId(courseId, page);
     }
 
     public Optional<Question> getQuestionById(UUID questionId) {

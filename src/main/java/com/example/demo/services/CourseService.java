@@ -7,8 +7,12 @@ import com.example.demo.controllers.response.QuestionResponse;
 import com.example.demo.entities.Course;
 import com.example.demo.entities.Question;
 import com.example.demo.repositories.CoursesRepository;
+import com.example.demo.repositories.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,6 +25,7 @@ import java.util.UUID;
 public class CourseService {
 
     private final CoursesRepository coursesRepository;
+    private final QuestionRepository questionRepository;
     private final QuestionService questionService;
     private final ModelMapper mapper;
     public CourseResponse createCourse(CourseRequest courseRequest) {
@@ -54,9 +59,9 @@ public class CourseService {
         return mapper.map(createdQuestion, QuestionResponse.class);
     }
 
-    public List<QuestionResponse> getQuestions(UUID courseId) throws Exception {
+    public Page<QuestionResponse> getQuestions(UUID courseId, int page) throws Exception {
         this.findCourseById(courseId).orElseThrow(() -> new Exception("Id do curso não existe"));
-        List<Question> questions = questionService.getQuestions(courseId);
-        return questions.stream().map(el -> mapper.map(el, QuestionResponse.class)).toList();
+        Pageable pageable = PageRequest.of(page, 10);
+        return questionRepository.findQuestionByCourseId(courseId, pageable).map(el -> mapper.map(el, QuestionResponse.class));
     }
 }
